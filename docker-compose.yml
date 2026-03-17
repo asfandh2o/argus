@@ -69,5 +69,14 @@ services:
       - DATABASE_URL=postgresql+asyncpg://argus:argus_password@db:5432/argus_db
       - REDIS_URL=redis://redis:6379/0
 
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - VITE_API_URL=http://api:8002
+    depends_on:
+      - api
+
 volumes:
   argus_pgdata:
